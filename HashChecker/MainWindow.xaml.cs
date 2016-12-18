@@ -25,10 +25,19 @@ namespace HashChecker
         public MainWindow()
         {
             InitializeComponent();
-            Md5File.Text = createMd5Hash("C:\\mariadb-10.1.20.tar.gz");
         }
 
-        public string createMd5Hash(string filename)
+        private void FileDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                string filePath = files[0];
+                Md5File.Text = createMd5Hash(filePath);
+            }
+        }
+
+        private string createMd5Hash(string filename)
         {
             using (var md5 = MD5.Create())
             {
