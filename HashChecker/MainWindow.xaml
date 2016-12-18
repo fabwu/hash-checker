@@ -20,7 +20,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Label Grid.Column="0" Grid.Row="0">MD5 von Datei</Label>
-        <TextBox Grid.Column="0" Grid.Row="1" IsEnabled="False"></TextBox>
+        <TextBox Name="Md5File" Grid.Column="0" Grid.Row="1" IsEnabled="False"></TextBox>
         <Label Grid.Column="0" Grid.Row="2">SHA1 von Datei</Label>
         <TextBox Grid.Column="0" Grid.Row="3" IsEnabled="False"></TextBox>
 
