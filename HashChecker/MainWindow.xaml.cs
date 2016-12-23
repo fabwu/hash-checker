@@ -1,19 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HashChecker
 {
@@ -22,8 +10,11 @@ namespace HashChecker
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Md5Hash md5Hash;
+
         public MainWindow()
         {
+            this.md5Hash = new Md5Hash();
             InitializeComponent();
         }
 
@@ -33,19 +24,44 @@ namespace HashChecker
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
                 string filePath = files[0];
-                Md5File.Text = createMd5Hash(filePath);
+
+                this.md5Hash.setMd5HashFromFile(filePath);
+
+                Md5File.Text = this.md5Hash.md5File;
+                Sha1File.Text = createSha1Hash(filePath);
+
+                checkHashes();
             }
         }
 
-        private string createMd5Hash(string filename)
+        private string createSha1Hash(string filePath)
         {
-            using (var md5 = MD5.Create())
+            using (var stream = File.OpenRead(filePath))
             {
-                using (var stream = File.OpenRead(filename))
+                using (SHA1Managed sha1 = new SHA1Managed())
                 {
-                    return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", "‌​").ToLower();
+                    return BitConverter.ToString(sha1.ComputeHash(stream)).Replace("-", "‌​").ToLower();
                 }
             }
+        }
+
+        private void checkHashes()
+        {
+            if (isValid())
+            {
+                ValidIcon.Visibility = Visibility.Visible;
+                InvalidIcon.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                ValidIcon.Visibility = Visibility.Hidden;
+                InvalidIcon.Visibility = Visibility.Visible;
+            }
+        }
+
+        private Boolean isValid()
+        {
+            return true;
         }
     }
 
