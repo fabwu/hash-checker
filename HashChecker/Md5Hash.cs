@@ -8,6 +8,8 @@ namespace HashChecker
     {
         public string md5File { get; private set; }
 
+        public string md5Input { get; set; }
+
         public void setMd5HashFromFile(string filePath)
         {
             using (var stream = File.OpenRead(filePath))

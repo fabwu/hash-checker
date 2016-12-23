@@ -63,6 +63,11 @@ namespace HashChecker
         {
             return true;
         }
+
+        private void Md5Input_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            this.md5Hash.md5Input = Md5Input.Text;
+        }
     }
 
 }
