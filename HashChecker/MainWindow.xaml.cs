@@ -11,10 +11,12 @@ namespace HashChecker
     public partial class MainWindow : Window
     {
         private Md5Hash md5Hash;
+        private Sha1Hash sha1Hash;
 
         public MainWindow()
         {
             this.md5Hash = new Md5Hash();
+            this.sha1Hash = new Sha1Hash();
             InitializeComponent();
         }
 
@@ -26,22 +28,12 @@ namespace HashChecker
                 string filePath = files[0];
 
                 this.md5Hash.setMd5HashFromFile(filePath);
+                this.sha1Hash.setHashFromFile(filePath);
 
                 Md5File.Text = this.md5Hash.md5File;
-                Sha1File.Text = createSha1Hash(filePath);
+                Sha1File.Text = this.sha1Hash.fileHash;
 
                 checkHashes();
-            }
-        }
-
-        private string createSha1Hash(string filePath)
-        {
-            using (var stream = File.OpenRead(filePath))
-            {
-                using (SHA1Managed sha1 = new SHA1Managed())
-                {
-                    return BitConverter.ToString(sha1.ComputeHash(stream)).Replace("-", "‌​").ToLower();
-                }
             }
         }
 
@@ -61,12 +53,13 @@ namespace HashChecker
 
         private Boolean isValid()
         {
-            return this.md5Hash.isEquals();
+            return this.md5Hash.isEquals() || this.sha1Hash.isEquals();
         }
 
         private void Md5Input_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             this.md5Hash.md5Input = Md5Input.Text;
+            this.sha1Hash.inputHash = Sha1Input.Text;
 
             checkHashes();
         }

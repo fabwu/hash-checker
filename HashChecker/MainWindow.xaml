@@ -20,18 +20,18 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center">MD5 von Datei</Label>
-        <TextBox Name="Md5File" Grid.Column="0" Grid.Row="1" IsEnabled="True" TextAlignment="Center"/>
+        <TextBox Name="Md5File" Grid.Column="0" Grid.Row="1" IsReadOnly="True" TextAlignment="Center"/>
         <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center">SHA1 von Datei</Label>
-        <TextBox Name="Sha1File" Grid.Column="0" Grid.Row="3" IsEnabled="False" TextAlignment="Center"/>
+        <TextBox Name="Sha1File" Grid.Column="0" Grid.Row="3" IsReadOnly="True" TextAlignment="Center"/>
 
         <Path Name="ValidIcon" Grid.Column="1" Grid.Row="0" Grid.RowSpan="4" Visibility="Hidden" Fill="Black" Width="100" Height="Auto" Stretch="Uniform" UseLayoutRounding="False" Data="F1 M 0,110L 47.6667,62L 102,117.333L 218.667,0L 266,48L 102,212.333L 0,110 Z " />
         <Path Name="InvalidIcon" Grid.Column="1" Grid.Row="0" Grid.RowSpan="4" Fill="Black" Width="100" Height="Auto" Stretch="Uniform" Data="F1 M 4.70432,0L 0.0480347,4.77802L 7.00842,11.6812L 0,18.7292L 4.70432,23.46L 11.6647,16.412L 18.6252,23.46L 23.3774,18.7774L 16.369,11.6812L 23.3294,4.77802L 18.6252,0L 11.6647,6.9986L 4.70432,0 Z "/>
-        
+
         <Label Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center">MD5 zum Vergleichen</Label>
         <TextBox Name="Md5Input" Grid.Column="2" Grid.Row="1" TextChanged="Md5Input_TextChanged" TextAlignment="Center"/>
         <Label Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center">SHA1 zum Vergleichen</Label>
-        <TextBox Grid.Column="2" Grid.Row="3" />
-        
+        <TextBox Name="Sha1Input" Grid.Column="2" Grid.Row="3" TextChanged="Md5Input_TextChanged" TextAlignment="Center"/>
+
         <Rectangle Drop="FileDrop" AllowDrop="True" Margin="0,15,0,0"  Grid.Column="0" Grid.Row="4" Fill="LightGray" Grid.ColumnSpan="3"/>
     </Grid>
 </Window>
