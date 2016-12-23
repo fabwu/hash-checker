@@ -18,5 +18,10 @@ namespace HashChecker
                 md5File = BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", "‌​").ToLower();
             }
         }
+
+        public Boolean isEquals()
+        {
+            return !String.IsNullOrWhiteSpace(md5File) && !String.IsNullOrWhiteSpace(md5Input) && String.Equals(md5File, md5Input);
+        }
     }
 }
