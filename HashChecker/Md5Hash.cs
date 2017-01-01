@@ -15,13 +15,13 @@ namespace HashChecker
             using (var stream = File.OpenRead(filePath))
             using (var md5 = MD5.Create())
             {
-                md5File = BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", "‌​").ToLower();
+                md5File = BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", String.Empty).ToLower();
             }
         }
 
         public Boolean isEquals()
         {
-            return !String.IsNullOrWhiteSpace(md5File) && !String.IsNullOrWhiteSpace(md5Input) && String.Equals(md5File, md5Input);
+            return !String.IsNullOrWhiteSpace(md5File) && !String.IsNullOrWhiteSpace(md5Input) && String.Equals(md5File, md5Input, StringComparison.OrdinalIgnoreCase);
         }
     }
 }
