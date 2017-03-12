@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Security.Cryptography;
 using System.Windows;
 
 namespace HashChecker
@@ -27,19 +25,19 @@ namespace HashChecker
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
                 string filePath = files[0];
 
-                this.md5Hash.setMd5HashFromFile(filePath);
-                this.sha1Hash.setHashFromFile(filePath);
+                this.md5Hash.SetMd5HashFromFile(filePath);
+                this.sha1Hash.SetHashFromFile(filePath);
 
-                Md5File.Text = this.md5Hash.md5File;
-                Sha1File.Text = this.sha1Hash.fileHash;
+                Md5File.Text = this.md5Hash.Md5File;
+                Sha1File.Text = this.sha1Hash.FileHash;
 
-                checkHashes();
+                CheckHashes();
             }
         }
 
-        private void checkHashes()
+        private void CheckHashes()
         {
-            if (isValid())
+            if (IsValid())
             {
                 ValidIcon.Visibility = Visibility.Visible;
                 InvalidIcon.Visibility = Visibility.Hidden;
@@ -51,17 +49,19 @@ namespace HashChecker
             }
         }
 
-        private Boolean isValid()
+        private Boolean IsValid()
         {
-            return this.md5Hash.isEquals() || this.sha1Hash.isEquals();
+            return this.md5Hash.IsEquals() || this.sha1Hash.IsEquals();
         }
 
-        private void Md5Input_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void HashChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            this.md5Hash.md5Input = Md5Input.Text;
-            this.sha1Hash.inputHash = Sha1Input.Text;
+            Md5Input.Text = Md5Input.Text.Trim();
+            Sha1Input.Text = Sha1Input.Text.Trim();
+            this.md5Hash.Md5Input = Md5Input.Text;
+            this.sha1Hash.InputHash = Sha1Input.Text;
 
-            checkHashes();
+            CheckHashes();
         }
     }
 

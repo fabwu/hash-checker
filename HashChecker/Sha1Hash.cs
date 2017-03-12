@@ -6,22 +6,22 @@ namespace HashChecker
 {
     internal class Sha1Hash
     {
-        public string fileHash { get; private set; }
+        public string FileHash { get; private set; }
 
-        public string inputHash { get; set; }
+        public string InputHash { get; set; }
 
-        public void setHashFromFile(string filePath)
+        public void SetHashFromFile(string filePath)
         {
             using (var stream = File.OpenRead(filePath))
             using (var sha1 = SHA1.Create())
             {
-                fileHash = BitConverter.ToString(sha1.ComputeHash(stream)).Replace("-", "‌​").ToLower();
+                FileHash = BitConverter.ToString(sha1.ComputeHash(stream)).Replace("-", "‌​").ToLower();
             }
         }
 
-        public Boolean isEquals()
+        public Boolean IsEquals()
         {
-            return !String.IsNullOrWhiteSpace(fileHash) && !String.IsNullOrWhiteSpace(inputHash) && String.Equals(fileHash, inputHash);
+            return !String.IsNullOrWhiteSpace(FileHash) && !String.IsNullOrWhiteSpace(InputHash) && String.Equals(FileHash, InputHash);
         }
     }
 }

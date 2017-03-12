@@ -6,22 +6,22 @@ namespace HashChecker
 {
     internal class Md5Hash
     {
-        public string md5File { get; private set; }
+        public string Md5File { get; private set; }
 
-        public string md5Input { get; set; }
+        public string Md5Input { get; set; }
 
-        public void setMd5HashFromFile(string filePath)
+        public void SetMd5HashFromFile(string filePath)
         {
             using (var stream = File.OpenRead(filePath))
             using (var md5 = MD5.Create())
             {
-                md5File = BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", String.Empty).ToLower();
+                Md5File = BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", String.Empty).ToLower();
             }
         }
 
-        public Boolean isEquals()
+        public Boolean IsEquals()
         {
-            return !String.IsNullOrWhiteSpace(md5File) && !String.IsNullOrWhiteSpace(md5Input) && String.Equals(md5File, md5Input, StringComparison.OrdinalIgnoreCase);
+            return !String.IsNullOrWhiteSpace(Md5File) && !String.IsNullOrWhiteSpace(Md5Input) && String.Equals(Md5File, Md5Input, StringComparison.OrdinalIgnoreCase);
         }
     }
 }
